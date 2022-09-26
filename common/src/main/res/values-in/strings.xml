@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name_without_space">Storyapp</string>
+    <string name="email">Email</string>
+    <string name="password">Sandi</string>
+    <string name="name">Nama</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="wording_no_account_yet">Belum punya Akun? Daftar</string>
+    <string name="wording_have_account">Sudah punya Akun? Masuk</string>
+
+</resources>

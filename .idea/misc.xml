@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/auth/src/main/res/layout/fragment_login.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/auth/src/main/res/layout/fragment_register.xml" value="0.234375" />
         <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/layout/fragment_home.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/story/src/main/res/layout/fragment_new_story.xml" value="0.22395833333333334" />
       </map>

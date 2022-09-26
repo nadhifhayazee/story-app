@@ -1,5 +1,6 @@
 package com.nadhif.hayazee.network
 
+import com.nadhif.hayazee.datastore.AppDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
+import javax.inject.Singleton
 
 
 @Module
@@ -34,10 +36,8 @@ object NetworkModule {
     fun provideOkHttpClientBuilder(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         @Named(Constant.HiltNamed.HEADER_INTERCEPTOR) headerInterceptor: Interceptor,
-        @Named(Constant.HiltNamed.NETWORK_INTERCEPTOR) networkInterceptor: Interceptor,
     ): OkHttpClient.Builder = OkHttpClient().newBuilder()
         .addInterceptor(headerInterceptor)
-        .addInterceptor(networkInterceptor)
         .addInterceptor(httpLoggingInterceptor)
         .readTimeout(Constant.DEFAULT_TIMEOUT_IN_SECOND, TimeUnit.SECONDS)
         .writeTimeout(Constant.DEFAULT_TIMEOUT_IN_SECOND, TimeUnit.SECONDS)
@@ -51,15 +51,26 @@ object NetworkModule {
 
     @Provides
     @Named(Constant.HiltNamed.HEADER_INTERCEPTOR)
-    fun provideHeaderInterceptor(): Interceptor = Interceptor { chain ->
+    fun provideHeaderInterceptor(
+        appDataStore: AppDataStore
+    ): Interceptor = Interceptor { chain ->
         val request: Request = chain.request().newBuilder()
             .addHeader(Constant.HEADER_ACCEPT, Constant.HEADER_APP_JSON)
             .addHeader(Constant.HEADER_CONTENT_TYPE, Constant.HEADER_APP_JSON)
-            .addHeader(Constant.HEADER_AUTHORIZATION, "")
+            .addHeader(Constant.HEADER_AUTHORIZATION, appDataStore.getUser()?.token ?: "")
             .build()
         chain.proceed(request)
     }
 
+    @Provides
+    @Singleton
+    fun provideApiService(
+        retrofitBuilder: Retrofit.Builder,
+        okHttpClient: OkHttpClient.Builder,
+    ): ApiService {
+        return retrofitBuilder.client(okHttpClient.build()).baseUrl(BuildConfig.BASE_URL).build()
+            .create(ApiService::class.java)
+    }
 
 //    @Provides
 //    @Named(Constant.HiltNamed.NETWORK_INTERCEPTOR)
