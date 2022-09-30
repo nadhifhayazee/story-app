@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Story App</string>
     <string name="app_name_without_space">Storyapp</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -8,5 +9,11 @@
     <string name="register">Sign Up</string>
     <string name="wording_no_account_yet">Don\'t have an Account? Sign Up</string>
     <string name="wording_have_account">have an Account? Sign In</string>
+    <string name="email_wrong_format">Invalid email format</string>
+    <string name="password_less_characters">Password must be at least 6 characters</string>
+    <string name="name_must_be_filled">Name must be filled</string>
+    <string name="try_again">Try again</string>
+    <string name="story_detail">Story Detail</string>
+    <string name="data_not_found">Data not found</string>
 
 </resources>

@@ -8,15 +8,17 @@
     <fragment
         android:id="@+id/login_fragment"
         android:name="com.nadhif.hayazee.auth.login.LoginFragment"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_login_fragment_to_register_fragment"
             app:destination="@id/register_fragment" />
+
+        <deepLink app:uri="android-app://nadhif.story.app/login_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/register_fragment"
         android:name="com.nadhif.hayazee.auth.register.RegisterFragment"
-        tools:layout="@layout/fragment_register"/>
+        tools:layout="@layout/fragment_register" />
 
 </navigation>

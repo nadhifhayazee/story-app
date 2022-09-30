@@ -1,6 +1,7 @@
 package com.nadhif.hayazee.domain.auth
 
 import com.nadhif.hayazee.data.auth.AuthRepository
+import com.nadhif.hayazee.datastore.AppDataStore
 import com.nadhif.hayazee.domain.BaseUseCase
 import com.nadhif.hayazee.model.common.ResponseState
 import com.nadhif.hayazee.model.request.LoginRequest
@@ -10,7 +11,8 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val dataStore: AppDataStore
 ) : BaseUseCase() {
 
     operator fun invoke(body: LoginRequest): Flow<ResponseState<LoginResponse>> {
@@ -20,6 +22,7 @@ class LoginUseCase @Inject constructor(
                 val response = authRepository.login(body)
                 validateResponse(response,
                     onSuccess = {
+                        it.loginResult?.let { it1 -> dataStore.saveUser(it1) }
                         emit(ResponseState.Success(it))
                     },
                     onError = {

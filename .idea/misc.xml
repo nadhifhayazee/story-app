@@ -6,7 +6,13 @@
         <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/auth/src/main/res/layout/fragment_login.xml" value="0.22395833333333334" />
         <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/auth/src/main/res/layout/fragment_register.xml" value="0.234375" />
-        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/layout/fragment_home.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/drawable/ic_add_new_story.xml" value="0.1205" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/layout/fragment_home.xml" value="0.152" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/layout/fragment_story_detail.xml" value="0.152" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/layout/pager_footer_layout.xml" value="0.2203125" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/layout/story_item_layout.xml" value="0.2" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/layout/story_shimmer.xml" value="0.2203125" />
+        <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/home/src/main/res/layout/story_shimmer_layout.xml" value="0.234375" />
         <entry key="..\:/Users/nadhi/Documents/dicoding/story_app/feature/story/src/main/res/layout/fragment_new_story.xml" value="0.22395833333333334" />
       </map>
     </option>

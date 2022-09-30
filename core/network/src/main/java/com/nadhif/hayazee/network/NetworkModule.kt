@@ -57,7 +57,10 @@ object NetworkModule {
         val request: Request = chain.request().newBuilder()
             .addHeader(Constant.HEADER_ACCEPT, Constant.HEADER_APP_JSON)
             .addHeader(Constant.HEADER_CONTENT_TYPE, Constant.HEADER_APP_JSON)
-            .addHeader(Constant.HEADER_AUTHORIZATION, appDataStore.getUser()?.token ?: "")
+            .addHeader(
+                Constant.HEADER_AUTHORIZATION,
+                ("Bearer " + appDataStore.getUser()?.token) ?: ""
+            )
             .build()
         chain.proceed(request)
     }

@@ -10,12 +10,14 @@ buildscript {
         okhttp3_version = "4.9.1"
         nav_version = "2.5.2"
         coroutine_version = "1.6.4"
-        lifecycle_version               = "2.5.1"
+        lifecycle_version = "2.5.1"
         fragment_version = "1.5.3"
+        paging_version = "3.1.1"
     }
 
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.2'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 

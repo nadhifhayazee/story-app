@@ -23,11 +23,11 @@ class RegisterUseCase @Inject constructor(
                         emit(ResponseState.Success(it))
                     },
                     onError = {
-                        emit(ResponseState.Error(it))
+                        emit(ResponseState.Error(it ?: "User not found"))
                     }
                 )
             } catch (e: Exception) {
-                emit(ResponseState.Error(e.message ?: "Terjadi kesalahan"))
+                emit(ResponseState.Error(e.message ?: "Unknown Error"))
             }
         }
     }

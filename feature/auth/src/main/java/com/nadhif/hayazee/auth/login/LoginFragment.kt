@@ -2,9 +2,10 @@ package com.nadhif.hayazee.auth.login
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import com.nadhif.hayazee.auth.R
 import com.nadhif.hayazee.auth.databinding.FragmentLoginBinding
@@ -12,7 +13,11 @@ import com.nadhif.hayazee.baseview.customview.edittext.FormValidator
 import com.nadhif.hayazee.baseview.customview.edittext.validator.EmailValidator
 import com.nadhif.hayazee.baseview.customview.edittext.validator.PasswordValidator
 import com.nadhif.hayazee.baseview.fragment.BaseFragment
-import com.nadhif.hayazee.datastore.AppDataStore
+import com.nadhif.hayazee.baseview.fragment.navigateDeepLink
+import com.nadhif.hayazee.common.DeepLinkRoutes
+import com.nadhif.hayazee.common.extension.gone
+import com.nadhif.hayazee.common.extension.showErrorSnackBar
+import com.nadhif.hayazee.common.extension.visible
 import com.nadhif.hayazee.model.common.ResponseState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -26,9 +31,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     lateinit var loginVmFactory: LoginViewModel.Factory
     private val loginViewModel by viewModels<LoginViewModel> { loginVmFactory }
 
-    @Inject
-    lateinit var dataStore: AppDataStore
-
     private lateinit var formValidator: FormValidator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,26 +38,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         setupView()
         observeVm()
 
-    }
-
-    private fun observeVm() {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            loginViewModel.loginState.collectLatest {
-                when (it) {
-                    is ResponseState.Loading -> {
-
-                    }
-                    is ResponseState.Success -> {
-                        it.data?.loginResult?.let { it1 -> dataStore.saveUser(it1) }
-                        Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
-                    }
-
-                    is ResponseState.Error -> {
-
-                    }
-                }
-            }
-        }
     }
 
     private fun setupView() {
@@ -86,4 +68,35 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
     }
+
+    private fun observeVm() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            loginViewModel.loginState.collectLatest {
+                when (it) {
+                    is ResponseState.Loading -> {
+                        binding.progressBar.visible()
+                    }
+                    is ResponseState.Success -> {
+                        binding.progressBar.gone()
+                        navigateToHome()
+                    }
+
+                    is ResponseState.Error -> {
+                        binding.apply {
+                            progressBar.gone()
+                            root.showErrorSnackBar(it.message)
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun navigateToHome() {
+        findNavController().popBackStack()
+        findNavController().navigateDeepLink(DeepLinkRoutes.homePage.toUri())
+    }
+
+
 }

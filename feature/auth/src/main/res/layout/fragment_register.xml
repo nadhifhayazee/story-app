@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".login.LoginFragment">
+    android:fillViewport="true">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +33,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
             android:hint="@string/name"
-            app:errorMessage="Masukkan email dengan benar"
+            app:errorMessage="@string/name_must_be_filled"
             app:layout_constraintBottom_toTopOf="@+id/input_layout_email"
             app:layout_constraintTop_toBottomOf="@+id/tv_app_title"
             tools:layout_editor_absoluteX="16dp">
@@ -53,7 +52,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/email"
-            app:errorMessage="Masukkan email dengan benar"
+            app:errorMessage="@string/email_wrong_format"
             app:layout_constraintBottom_toTopOf="@+id/input_layout_password"
             app:layout_constraintTop_toBottomOf="@+id/input_layout_name"
             tools:layout_editor_absoluteX="16dp">
@@ -72,7 +71,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/password"
-            app:errorMessage="Masukkan email dengan benar"
+            app:errorMessage="@string/password_less_characters"
             app:layout_constraintBottom_toTopOf="@+id/btn_register"
             app:layout_constraintTop_toBottomOf="@+id/input_layout_email"
             tools:layout_editor_absoluteX="16dp">
@@ -108,6 +107,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_register"
             tools:layout_editor_absoluteX="16dp" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

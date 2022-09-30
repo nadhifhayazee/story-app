@@ -1,6 +1,7 @@
 package com.nadhif.hayazee.datastore
 
 import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import com.nadhif.hayazee.model.common.User
 import javax.inject.Inject
 
@@ -14,8 +15,14 @@ class AppDataStore @Inject constructor(
         const val IS_LOGIN_DATA_STORE = "IS_LOGIN_DATA_STORE"
     }
 
+    val isLoggedInLiveData = MutableLiveData(false)
+    init {
+        isLoggedInLiveData.value = getUser() != null
+    }
+
     fun saveUser(user: User) {
         saveDataObject(USER_DATA_STORE, user)
+        isLoggedInLiveData.value = true
     }
 
     fun getUser(): User? {

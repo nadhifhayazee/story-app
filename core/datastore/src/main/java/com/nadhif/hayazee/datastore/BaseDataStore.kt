@@ -21,4 +21,8 @@ open class BaseDataStore @Inject constructor(
         return gson.fromJson(savedData, classOfT)
     }
 
+    fun deleteDataStore(){
+        sharedPreferences.edit().clear().apply()
+    }
+
 }

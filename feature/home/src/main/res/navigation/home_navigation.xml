@@ -3,11 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/home_fragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.nadhif.hayazee.home.HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        android:id="@+id/home_fragment"
+        android:name="com.nadhif.hayazee.home.story_list.HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <deepLink app:uri="android-app://nadhif.story.app/home_fragment" />
+        <action
+            android:id="@+id/action_home_fragment_to_story_detail_fragment"
+            app:destination="@id/story_detail_fragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/story_detail_fragment"
+        android:name="com.nadhif.hayazee.home.story_detail.StoryDetailFragment"
+        tools:layout="@layout/fragment_story_detail">
+
+        <argument
+            android:name="story"
+            app:argType="com.nadhif.hayazee.model.common.Story"
+            app:nullable="true"/>
+    </fragment>
 
 </navigation>

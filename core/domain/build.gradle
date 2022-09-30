@@ -46,6 +46,7 @@ dependencies {
 
     implementation project(":core:data")
     implementation project(":core:model")
+    implementation project(":core:datastore")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -62,6 +63,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
 
 
 }
