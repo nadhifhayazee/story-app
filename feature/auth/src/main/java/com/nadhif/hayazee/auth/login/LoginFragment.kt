@@ -1,11 +1,12 @@
 package com.nadhif.hayazee.auth.login
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import com.nadhif.hayazee.auth.R
 import com.nadhif.hayazee.auth.databinding.FragmentLoginBinding
@@ -35,8 +36,57 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupAnimation()
         setupView()
         observeVm()
+
+    }
+
+    private fun setupAnimation() {
+        val appTitle = ObjectAnimator.ofFloat(
+            binding.tvAppTitle,
+            View.TRANSLATION_X,
+            -30f,
+            binding.tvAppTitle.width.toFloat()
+        ).apply {
+            duration = 500
+        }
+        val email =
+            ObjectAnimator.ofFloat(
+                binding.inputLayoutEmail,
+                View.TRANSLATION_X,
+                -30f,
+                binding.inputLayoutEmail.width.toFloat()
+            ).apply {
+                duration = 500
+            }
+        val password =
+            ObjectAnimator.ofFloat(
+                binding.inputLayoutPassword,
+                View.TRANSLATION_X,
+                -30f,
+                binding.inputLayoutPassword.width.toFloat()
+            ).apply {
+                duration = 500
+            }
+
+
+        val login = ObjectAnimator.ofFloat(
+            binding.btnLogin,
+            View.TRANSLATION_X,
+            -30f,
+            binding.btnLogin.width.toFloat()
+        ).apply {
+            duration = 500
+        }
+        val signIn =
+            ObjectAnimator.ofFloat(binding.tvToRegister, View.ALPHA, 1f).setDuration(500)
+
+        AnimatorSet().apply {
+            playTogether(appTitle, email, password, login, signIn)
+            start()
+        }
 
     }
 

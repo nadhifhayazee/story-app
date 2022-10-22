@@ -59,7 +59,7 @@ object NetworkModule {
             .addHeader(Constant.HEADER_CONTENT_TYPE, Constant.HEADER_APP_JSON)
             .addHeader(
                 Constant.HEADER_AUTHORIZATION,
-                ("Bearer " + appDataStore.getUser()?.token) ?: ""
+                ("Bearer " + appDataStore.getUser()?.token)
             )
             .build()
         chain.proceed(request)

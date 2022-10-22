@@ -54,5 +54,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    api 'com.github.nadhifhayazee:android-general-toolbar:1.2.0'
+
 
 }

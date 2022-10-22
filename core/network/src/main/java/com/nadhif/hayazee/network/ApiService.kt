@@ -5,11 +5,10 @@ import com.nadhif.hayazee.model.request.RegisterRequest
 import com.nadhif.hayazee.model.response.GetStoryResponse
 import com.nadhif.hayazee.model.response.LoginResponse
 import com.nadhif.hayazee.model.response.RegisterResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -29,4 +28,11 @@ interface ApiService {
         @Query("page") page: Int?,
         @Query("location") location: Int?
     ): Response<GetStoryResponse>
+
+    @Multipart
+    @POST("stories")
+    suspend fun postStory(
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody
+    ): Response<RegisterResponse>
 }

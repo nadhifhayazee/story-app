@@ -1,5 +1,7 @@
 package com.nadhif.hayazee.auth.register
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -29,8 +31,67 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupAnimation()
         setupView()
         observeVm()
+    }
+
+    private fun setupAnimation() {
+        val appTitle = ObjectAnimator.ofFloat(
+            binding.tvAppTitle,
+            View.TRANSLATION_X,
+            -30f,
+            binding.tvAppTitle.width.toFloat()
+        ).apply {
+            duration = 500
+        }
+
+        val name =
+            ObjectAnimator.ofFloat(
+                binding.inputLayoutName,
+                View.TRANSLATION_X,
+                -30f,
+                binding.inputLayoutName.width.toFloat()
+            ).apply {
+                duration = 500
+            }
+
+        val email =
+            ObjectAnimator.ofFloat(
+                binding.inputLayoutEmail,
+                View.TRANSLATION_X,
+                -30f,
+                binding.inputLayoutEmail.width.toFloat()
+            ).apply {
+                duration = 500
+            }
+        val password =
+            ObjectAnimator.ofFloat(
+                binding.inputLayoutPassword,
+                View.TRANSLATION_X,
+                -30f,
+                binding.inputLayoutPassword.width.toFloat()
+            ).apply {
+                duration = 500
+            }
+
+
+        val register = ObjectAnimator.ofFloat(
+            binding.btnRegister,
+            View.TRANSLATION_X,
+            -30f,
+            binding.btnRegister.width.toFloat()
+        ).apply {
+            duration = 500
+        }
+        val login =
+            ObjectAnimator.ofFloat(binding.tvToLogin, View.ALPHA, 1f).setDuration(500)
+
+        AnimatorSet().apply {
+            playTogether(appTitle, email, password, register, login)
+            start()
+        }
+
     }
 
     private fun observeVm() {

@@ -1,4 +1,4 @@
-package com.nadhif.hayazee.domain.home
+package com.nadhif.hayazee.domain.story
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

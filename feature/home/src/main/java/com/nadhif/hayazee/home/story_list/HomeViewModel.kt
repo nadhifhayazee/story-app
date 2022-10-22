@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.nadhif.hayazee.baseview.viewmodel.BaseVmFactory
 import com.nadhif.hayazee.domain.auth.LogoutUseCase
-import com.nadhif.hayazee.domain.home.GetStoriesUseCase
+import com.nadhif.hayazee.domain.story.GetStoriesUseCase
 import com.nadhif.hayazee.model.common.ResponseState
 import com.nadhif.hayazee.model.common.Story
 import kotlinx.coroutines.flow.MutableStateFlow

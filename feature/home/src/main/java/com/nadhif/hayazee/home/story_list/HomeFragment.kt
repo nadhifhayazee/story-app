@@ -1,11 +1,15 @@
 package com.nadhif.hayazee.home.story_list
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +44,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private val adapter = StoryPagingAdapter()
 
+    companion object {
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            navigateToAddNewStory()
+        } else {
+            Toast.makeText(requireContext(), "Check your camera permission!", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -65,7 +84,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             btnLanguage.setOnClickListener {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
             }
+
+            btnAddNewStory.setOnClickListener {
+                if (!allPermissionsGranted()) {
+                    requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+                } else {
+                    navigateToAddNewStory()
+                }
+            }
         }
+    }
+
+    private fun navigateToAddNewStory() {
+        findNavController().navigate("android-app://nadhif.story.app/camera_fragment".toUri())
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            requireActivity(),
+            it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun showShimmer(show: Boolean) {

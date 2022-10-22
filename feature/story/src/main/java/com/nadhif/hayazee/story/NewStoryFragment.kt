@@ -1,59 +1,128 @@
 package com.nadhif.hayazee.story
 
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.nadhif.hayazee.baseview.customview.edittext.FormValidator
+import com.nadhif.hayazee.baseview.customview.edittext.validator.MustFilledValidator
+import com.nadhif.hayazee.baseview.fragment.BaseFragment
+import com.nadhif.hayazee.common.extension.gone
+import com.nadhif.hayazee.common.extension.showErrorSnackBar
+import com.nadhif.hayazee.common.extension.visible
+import com.nadhif.hayazee.common.util.CameraUtil
+import com.nadhif.hayazee.model.common.ResponseState
+import com.nadhif.hayazee.story.databinding.FragmentNewStoryBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import java.io.File
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class NewStoryFragment : BaseFragment<FragmentNewStoryBinding>(FragmentNewStoryBinding::inflate) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NewStoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NewStoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    @Inject
+    lateinit var newStoryVmFactory: AddNewStoryViewModel.Factory
+
+    private val newStoryViewModel by viewModels<AddNewStoryViewModel> { newStoryVmFactory }
+
+    private var photoUri: Uri? = null
+    private var photoFile: File? = null
+
+    companion object {
+        const val PHOTO_FILE_URI = "PHOTO_FILE_URI"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            photoUri = it.getParcelable(PHOTO_FILE_URI)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_story, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupListener()
+        setupView()
+        observePostStory()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NewStoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NewStoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun observePostStory() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            newStoryViewModel.postStoryState.collectLatest {
+                when (it) {
+                    is ResponseState.Loading -> {
+                        binding.progressBar.visible()
+                        binding.btnUploadStory.isEnabled = false
+                    }
+
+                    is ResponseState.Success -> {
+                        binding.progressBar.gone()
+                        binding.btnUploadStory.isEnabled = true
+                        navigateToHome()
+
+                    }
+
+                    is ResponseState.Error -> {
+                        binding.progressBar.gone()
+                        binding.btnUploadStory.isEnabled = true
+                        binding.root.showErrorSnackBar(it.message)
+                    }
+
                 }
             }
+        }
+    }
+
+    private fun navigateToHome() {
+        findNavController().popBackStack()
+        findNavController().popBackStack()
+    }
+
+    private fun setupListener() {
+        binding.apply {
+            toolbar.btnBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+            btnUploadStory.setOnClickListener {
+
+                newStoryViewModel.postStory(
+                    photoFile,
+                    tlDescription.editText?.text.toString()
+                )
+            }
+        }
+    }
+
+    private fun setupView() {
+        binding.apply {
+            photoUri?.let { uri ->
+                photoFile = CameraUtil.getRotatedImageFile(
+                    CameraUtil.uriToFile(uri, requireContext()),
+                    requireContext()
+                )
+                val imageBitmap = BitmapFactory.decodeFile(photoFile?.path)
+                ivPhoto.setImageBitmap(imageBitmap)
+
+
+                setupDescriptionValidation()
+            }
+
+        }
+    }
+
+    private fun setupDescriptionValidation() {
+        binding.apply {
+            tlDescription.setValidator(MustFilledValidator())
+            val formValidator = FormValidator(listOf(tlDescription))
+            formValidator.isFormValidated.observe(viewLifecycleOwner) {
+                btnUploadStory.isEnabled = it
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:toolbarTitle="@string/story_detail"/>
+        app:toolbarTitle="@string/story_detail" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
                 android:id="@+id/iv_story_photo"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:contentDescription="@string/cd_story_image"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="3:2"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,6 +40,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
+                android:contentDescription="@string/cd_user_photo"
                 android:src="@drawable/ic_user_photo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_story_photo" />

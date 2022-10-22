@@ -10,9 +10,21 @@
         android:name="com.nadhif.hayazee.story.NewStoryFragment"
         tools:layout="@layout/fragment_new_story">
 
-        <deepLink
-            app:uri="android-app://nadhif.story.app/new_story_fragment"/>
+        <deepLink app:uri="android-app://nadhif.story.app/new_story_fragment" />
 
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/camera_fragment"
+        android:name="com.nadhif.hayazee.story.CameraFragment"
+        app:route="add_photo_routes"
+        tools:layout="@layout/fragment_camera">
+
+        <deepLink app:uri="android-app://nadhif.story.app/camera_fragment" />
+        <action
+            android:id="@+id/action_camera_fragment_to_newStoryFragment"
+            app:destination="@id/newStoryFragment" />
 
     </fragment>
 

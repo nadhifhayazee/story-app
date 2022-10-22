@@ -15,11 +15,6 @@ class StoryDetailFragment :
     BaseFragment<FragmentStoryDetailBinding>(FragmentStoryDetailBinding::inflate) {
 
     private val args by navArgs<StoryDetailFragmentArgs>()
-//    private var story: Story? = null
-//
-//    companion object {
-//        const val STORY_DATA = "STORY_DATA"
-//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

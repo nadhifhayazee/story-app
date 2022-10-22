@@ -1,16 +1,16 @@
-package com.nadhif.hayazee.domain.home
+package com.nadhif.hayazee.domain.story
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.nadhif.hayazee.data.home.HomeRepository
+import com.nadhif.hayazee.data.home.StoryRepository
 import com.nadhif.hayazee.domain.BaseUseCase
 import com.nadhif.hayazee.model.common.Story
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetStoriesUseCase @Inject constructor(
-    private val homeRepository: HomeRepository
+    private val storyRepository: StoryRepository
 ) : BaseUseCase() {
 
     private val maxPage = 5
@@ -26,7 +26,7 @@ class GetStoriesUseCase @Inject constructor(
             pagingSourceFactory = {
                 BasePagingSource<Story>(
                     data = { page ->
-                        val response = homeRepository.getStories(size, page, null)
+                        val response = storyRepository.getStories(size, page, null)
                         var result = listOf<Story>()
                         validateResponse(response,
                             onSuccess = {

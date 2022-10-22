@@ -5,6 +5,6 @@ import com.nadhif.hayazee.baseview.customview.edittext.CustomTextInputLayout
 
 class MustFilledValidator : CustomTextInputLayout.Validator {
     override fun validate(textInputLayout: TextInputLayout): Boolean {
-        return textInputLayout.editText?.text.toString().isNotEmpty()
+        return textInputLayout.editText?.text.toString().trim().isNotEmpty()
     }
 }

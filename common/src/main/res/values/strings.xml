@@ -16,4 +16,21 @@
     <string name="story_detail">Story Detail</string>
     <string name="data_not_found">Data not found</string>
 
+    <string name="add_description">Add Description</string>
+    <string name="upload_new_story">Upload New Story</string>
+    <string name="add_story_photo">Add Story Photo</string>
+    <string name="description_error_message">Description must be filled!</string>
+
+    <string name="cd_add_new_story">Button add new story</string>
+    <string name="cd_logout_button">Button logout</string>
+    <string name="cd_localization_button">Button change language setting</string>
+    <string name="cd_user_photo">User photo</string>
+    <string name="cd_story_image_result">Image story result</string>
+    <string name="cd_take_photo">Button take photo</string>
+    <string name="cd_take_photo_gallery">Button take photo in gallery</string>
+    <string name="cd_switch_camera">Button switch camera</string>
+    <string name="cd_upload_new_story">Button upload new story</string>
+
+    <string name="cd_story_image">Story image</string>
+
 </resources>

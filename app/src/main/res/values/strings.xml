@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Story App</string>
+    <string name="appwidget_text">Story App Widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="empty_text">No Data</string>
+
 </resources>

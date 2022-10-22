@@ -36,6 +36,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="21dp"
+                android:contentDescription="@string/cd_logout_button"
                 android:src="@drawable/ic_logout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +47,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="34dp"
+                android:contentDescription="@string/cd_localization_button"
                 android:src="@drawable/ic_language"
                 app:layout_constraintBottom_toBottomOf="@id/btn_logout"
                 app:layout_constraintEnd_toStartOf="@id/btn_logout"
@@ -127,14 +129,17 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_new_story"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        android:backgroundTint="@color/white"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/cd_add_new_story"
         android:elevation="6dp"
         android:src="@drawable/ic_add_new_story"
+        app:backgroundTint="@color/white"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/purple_200" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

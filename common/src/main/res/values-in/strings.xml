@@ -16,5 +16,20 @@
     <string name="story_detail">Detail Story</string>
     <string name="data_not_found">Data tidak ditemukan</string>
 
+    <string name="add_description">Tambah Deskripsi</string>
+    <string name="upload_new_story">Unggah Cerita Baru</string>
+    <string name="add_story_photo">Tambah Foto Cerita</string>
+    <string name="description_error_message">Deskripsi harus diisi!</string>
+
+    <string name="cd_add_new_story">Tombol tambah cerita baru</string>
+    <string name="cd_story_image">Gambar cerita</string>
+    <string name="cd_logout_button">Tombol keluar</string>
+    <string name="cd_localization_button">Tombol ganti pengaturan bahasa</string>
+    <string name="cd_user_photo">Gambar foto user</string>
+    <string name="cd_story_image_result">Hasil gambar cerita</string>
+    <string name="cd_take_photo">Tombol ambil gambar</string>
+    <string name="cd_take_photo_gallery">Tombol ambil gambar di gallery</string>
+    <string name="cd_switch_camera">Tombol switch kamera</string>
+    <string name="cd_upload_new_story">Tombol unggah cerita baru</string>
 
 </resources>
