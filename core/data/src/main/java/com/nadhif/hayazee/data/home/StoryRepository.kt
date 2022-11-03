@@ -15,6 +15,8 @@ interface StoryRepository {
 
     suspend fun postStory(
         file: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: RequestBody?,
+        lon: RequestBody?,
     ): Response<RegisterResponse>
 }

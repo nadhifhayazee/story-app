@@ -30,11 +30,40 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/iv_user_photo"
+        app:layout_constraintBottom_toTopOf="@+id/iv_location"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/iv_user_photo"
-        app:layout_constraintTop_toTopOf="@id/iv_user_photo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="Mr Fulan" />
+
+    <ImageView
+        android:id="@+id/iv_location"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="2dp"
+        android:contentDescription="@string/cd_location_icon"
+        android:src="@drawable/ic_maps_red"
+        app:layout_constraintBottom_toTopOf="@+id/iv_story_photo"
+        app:layout_constraintStart_toStartOf="@id/tv_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/purple_200"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_location"
+        app:layout_constraintEnd_toEndOf="@id/tv_user_name"
+        app:layout_constraintStart_toEndOf="@id/iv_location"
+        app:layout_constraintTop_toTopOf="@id/iv_location"
+        tools:text="Jakarta" />
+
 
     <ImageView
         android:id="@+id/iv_story_photo"

@@ -82,23 +82,19 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
             val photoFile = createFile(application)
 
             val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-            imageCapture.takePicture(
-                outputOptions,
+            imageCapture.takePicture(outputOptions,
                 ContextCompat.getMainExecutor(requireActivity()),
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onError(exc: ImageCaptureException) {
                         Toast.makeText(
-                            requireActivity(),
-                            "Gagal mengambil gambar.",
-                            Toast.LENGTH_SHORT
+                            requireActivity(), "Gagal mengambil gambar.", Toast.LENGTH_SHORT
                         ).show()
                     }
 
                     override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                         navigateToAddNewStoryFragment(output.savedUri)
                     }
-                }
-            )
+                })
         }
     }
 
@@ -111,35 +107,30 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
     }
 
     private fun startCamera() {
-        activity?.let {
-            val cameraProviderFuture = ProcessCameraProvider.getInstance(it)
+        activity?.let { actvty ->
+            val cameraProviderFuture = ProcessCameraProvider.getInstance(actvty)
 
             cameraProviderFuture.addListener({
                 val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-                val preview = Preview.Builder()
-                    .build()
-                    .also {
-                        it.setSurfaceProvider(binding.cameraView.surfaceProvider)
-                    }
+                val preview = Preview.Builder().build().also {
+                    it.setSurfaceProvider(binding.cameraView.surfaceProvider)
+                }
 
                 imageCapture = ImageCapture.Builder().build()
 
                 try {
                     cameraProvider.unbindAll()
                     cameraProvider.bindToLifecycle(
-                        this,
-                        cameraSelector,
-                        preview,
-                        imageCapture
+                        this, cameraSelector, preview, imageCapture
                     )
                 } catch (exc: Exception) {
                     Toast.makeText(
                         activity,
-                        "Gagal memunculkan kamera.",
+                        resources.getString(com.nadhif.hayazee.common.R.string.open_camera_failed),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }, ContextCompat.getMainExecutor(it))
+            }, ContextCompat.getMainExecutor(actvty))
 
         }
     }

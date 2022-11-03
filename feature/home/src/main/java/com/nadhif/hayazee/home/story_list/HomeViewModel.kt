@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.nadhif.hayazee.baseview.viewmodel.BaseVmFactory
 import com.nadhif.hayazee.domain.auth.LogoutUseCase
-import com.nadhif.hayazee.domain.story.GetStoriesUseCase
+import com.nadhif.hayazee.domain.story.GetStoriesPagingUseCase
 import com.nadhif.hayazee.model.common.ResponseState
 import com.nadhif.hayazee.model.common.Story
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel(
-    private val getStoriesUseCase: GetStoriesUseCase,
+    private val getStoriesUseCase: GetStoriesPagingUseCase,
     private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
 
@@ -38,7 +38,7 @@ class HomeViewModel(
     }
 
     class Factory @Inject constructor(
-        getStoriesUseCase: GetStoriesUseCase,
+        getStoriesUseCase: GetStoriesPagingUseCase,
         logoutUseCase: LogoutUseCase
     ) : BaseVmFactory(
         HomeViewModel(getStoriesUseCase, logoutUseCase)

@@ -7,9 +7,7 @@ import com.nadhif.hayazee.domain.auth.RegisterUseCase
 import com.nadhif.hayazee.model.common.ResponseState
 import com.nadhif.hayazee.model.request.RegisterRequest
 import com.nadhif.hayazee.model.response.RegisterResponse
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,8 +16,8 @@ class RegisterViewModel(
 ) : ViewModel() {
 
 
-    private val _registerState = MutableSharedFlow<ResponseState<RegisterResponse>>()
-    val registerState get() = _registerState.asSharedFlow()
+    private val _registerState = MutableStateFlow<ResponseState<RegisterResponse>?>(null)
+    val registerState get() = _registerState.asStateFlow()
 
     fun register(
         name: String,
@@ -31,7 +29,7 @@ class RegisterViewModel(
                 name, email, password
             )
             registerUseCase(body).collectLatest {
-                _registerState.emit(it)
+                _registerState.value = it
             }
         }
     }

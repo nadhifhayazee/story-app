@@ -26,8 +26,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofitBuilder(
         gsonConverterFactory: GsonConverterFactory
-    ): Retrofit.Builder = Retrofit.Builder()
-        .addConverterFactory(gsonConverterFactory)
+    ): Retrofit.Builder = Retrofit.Builder().addConverterFactory(gsonConverterFactory)
 
     @Provides
     fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
@@ -36,8 +35,7 @@ object NetworkModule {
     fun provideOkHttpClientBuilder(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         @Named(Constant.HiltNamed.HEADER_INTERCEPTOR) headerInterceptor: Interceptor,
-    ): OkHttpClient.Builder = OkHttpClient().newBuilder()
-        .addInterceptor(headerInterceptor)
+    ): OkHttpClient.Builder = OkHttpClient().newBuilder().addInterceptor(headerInterceptor)
         .addInterceptor(httpLoggingInterceptor)
         .readTimeout(Constant.DEFAULT_TIMEOUT_IN_SECOND, TimeUnit.SECONDS)
         .writeTimeout(Constant.DEFAULT_TIMEOUT_IN_SECOND, TimeUnit.SECONDS)
@@ -54,14 +52,11 @@ object NetworkModule {
     fun provideHeaderInterceptor(
         appDataStore: AppDataStore
     ): Interceptor = Interceptor { chain ->
-        val request: Request = chain.request().newBuilder()
-            .addHeader(Constant.HEADER_ACCEPT, Constant.HEADER_APP_JSON)
-            .addHeader(Constant.HEADER_CONTENT_TYPE, Constant.HEADER_APP_JSON)
-            .addHeader(
-                Constant.HEADER_AUTHORIZATION,
-                ("Bearer " + appDataStore.getUser()?.token)
-            )
-            .build()
+        val request: Request =
+            chain.request().newBuilder().addHeader(Constant.HEADER_ACCEPT, Constant.HEADER_APP_JSON)
+                .addHeader(Constant.HEADER_CONTENT_TYPE, Constant.HEADER_APP_JSON).addHeader(
+                    Constant.HEADER_AUTHORIZATION, ("Bearer " + appDataStore.getUser()?.token)
+                ).build()
         chain.proceed(request)
     }
 
@@ -74,17 +69,5 @@ object NetworkModule {
         return retrofitBuilder.client(okHttpClient.build()).baseUrl(BuildConfig.BASE_URL).build()
             .create(ApiService::class.java)
     }
-
-//    @Provides
-//    @Named(Constant.HiltNamed.NETWORK_INTERCEPTOR)
-//    fun provideNetworkInterceptor(
-//        @ApplicationContext context: Context
-//    ): Interceptor = Interceptor { chain ->
-//        val request: Request = chain.request()
-//        if (!NetworkUtils.isConnected(context)) {
-//            throw NetworkConnectionException(context)
-//        }
-//        chain.proceed(request)
-//    }
-
+    
 }

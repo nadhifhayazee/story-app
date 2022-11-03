@@ -1,0 +1,89 @@
+=== Pengujian ViewModel ===
+
+1. Pengujian LoginViewModel
+    a. Ketika login success
+        - Memastikan mengembalikan ResponseState.Success
+        - Memastikan properti token tidak null
+    b. Ketika login gagal/error
+        - Memastikan mengembalikan ResponseState.Error
+        - Memastikan properti message sesuai dengan yang diharapkan
+
+2. Pengujian RegisterViewModel
+    a. Ketika register success
+        - Memastikan mengembalikan ResponseState.Success
+        - Memastikan properti error false
+        - Memastikan properti message sesuai dengan yang diharapkan
+    b. Ketika register gagal/error
+        - Memastikan mengembalikan ResponseState.Error
+        - Memastikan properti message sesuai dengan yang diharapkan
+
+3. Pengujian HomeViewModel
+    a. Ketika get story paging success
+        - Memastikan mengembalikan ResponseState.Success
+        - Memastikan list story tidak null
+        - Memastikan list size data paging sama dengan list size dummy
+    b. Ketika get story paging data kosong
+        - Memastikan mengembalikan ResponseState.Success
+        - Memastikan list data paging size 0
+
+4. Pengujian AddNewStoryViewModel
+    a. Ketika post story success
+        - Memastikan mengembalikan ResponseState.Success
+        - Memastikan properti error bernilai false
+        - Memastikan properti message sama dengan yang diharapkan
+    b. Ketika post story gagal
+        - Memastikan mengembalikan ResponseState.Error
+        - Memastikan pesan error sama dengan yang diharapkan
+
+5. Pengujian StoryMapsViewModel
+    a. Ketika get stories success
+        - Memastikan mengembalikan ResponseState.Success
+        - Memastikan list story size sama dengan yang diharapkan
+    b. Ketika get stories failed
+        - Memastikan mengembalikan ResponseState.Error
+        - Memastikan error message sama dengan yang diharapkan
+
+
+=== Pengujian Repository ===
+
+1. Pengujian AuthRepository
+    a. Ketika login success
+        - Memastikan response isSuccessful == true(response code is in the range [200..300))
+        - Memastikan response body tidak null
+        - Memastikan properti token sama dengan yang diharapkan
+
+    b. Ketika register success
+         - Memastikan response isSuccessful == true(response code is in the range [200..300))
+         - Memastikan response body tidak null
+         - Memastikan properti message sama dengan yang diharapkan
+
+    c. Ketika login gagal/error
+         - Memastikan response isSuccessful == false(response code is >=400)
+         - Memastikan response body null
+         - Memastikan errorBody sama dengan yang diharapkan
+
+    c. Ketika register gagal/error
+         - Memastikan response isSuccessful == false(response code is >=400)
+         - Memastikan response body null
+         - Memastikan errorBody sama dengan yang diharapkan
+
+2. Pengujian StoryRepository
+    a. Ketika get stories success
+        - Memastikan response isSuccessful == true(response code is in the range [200..300))
+        - Memastikan response body tidak null
+        - Memastikan size list story sama dengan yang diharapkan
+
+    b. Ketika post story success
+         - Memastikan response isSuccessful == true(response code is in the range [200..300))
+         - Memastikan response body tidak null
+         - Memastikan properti message sama dengan yang diharapkan
+
+    c. Ketika get stories gagal/error
+         - Memastikan response isSuccessful == false(response code is >=400)
+         - Memastikan response body null
+         - Memastikan errorBody sama dengan yang diharapkan
+
+    c. Ketika post story gagal/error
+         - Memastikan response isSuccessful == false(response code is >=400)
+         - Memastikan response body null
+         - Memastikan errorBody sama dengan yang diharapkan

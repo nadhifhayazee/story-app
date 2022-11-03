@@ -34,7 +34,8 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
+class
+HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
     StoryPagingAdapter.StorySelectedListener {
 
 
@@ -54,7 +55,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         if (isGranted) {
             navigateToAddNewStory()
         } else {
-            Toast.makeText(requireContext(), "Check your camera permission!", Toast.LENGTH_SHORT)
+            Toast.makeText(
+                requireContext(),
+                resources.getString(com.nadhif.hayazee.common.R.string.check_camera_permission),
+                Toast.LENGTH_SHORT
+            )
                 .show()
         }
     }
@@ -83,6 +88,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
             btnLanguage.setOnClickListener {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            }
+
+            btnStoryMaps.setOnClickListener {
+                findNavController().navigateDeepLink("android-app://nadhif.story.app/story_maps_fragment".toUri())
             }
 
             btnAddNewStory.setOnClickListener {

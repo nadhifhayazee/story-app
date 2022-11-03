@@ -6,8 +6,11 @@ import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.nadhif.hayazee.common.extension.gone
 import com.nadhif.hayazee.common.extension.loadImage
+import com.nadhif.hayazee.common.extension.visible
 import com.nadhif.hayazee.common.util.DateUtil
+import com.nadhif.hayazee.common.util.LocationUtil
 import com.nadhif.hayazee.home.databinding.StoryItemLayoutBinding
 import com.nadhif.hayazee.model.common.Story
 
@@ -47,9 +50,27 @@ class StoryPagingAdapter : PagingDataAdapter<Story, StoryPagingAdapter.ViewHolde
                     loadImage(data?.photoUrl)
                 }
 
+                val location = LocationUtil.getDistrictSubDistrictName(
+                    data?.lat ?: 0.0, data?.lon ?: 0.0,
+                    binding.root.context
+                )
+                if (location != null) {
+                    tvLocation.text = location
+                    tvLocation.visible()
+                    ivLocation.visible()
+                } else {
+                    tvLocation.gone()
+                    ivLocation.gone()
+                }
+
 
                 root.setOnClickListener {
-                    data?.let { it1 -> storySelectedListener?.onStorySelected(it1, ivStoryPhoto) }
+                    data?.let { it1 ->
+                        storySelectedListener?.onStorySelected(
+                            it1,
+                            ivStoryPhoto
+                        )
+                    }
                 }
             }
         }

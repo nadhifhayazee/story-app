@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/maps_navigation">
+
+    <fragment
+        android:id="@+id/story_maps_fragment"
+        android:name="com.nadhif.hayazee.maps.StoryMapsFragment"
+        tools:layout="@layout/fragment_story_maps">
+
+        <deepLink app:uri="android-app://nadhif.story.app/story_maps_fragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/select_location_fragment"
+        android:name="com.nadhif.hayazee.maps.SelectLocationFragment"
+        tools:layout="@layout/fragment_select_location">
+
+        <deepLink app:uri="android-app://nadhif.story.app/select_location_fragment/{latitude}/{longitude}" />
+    </fragment>
+
+</navigation>

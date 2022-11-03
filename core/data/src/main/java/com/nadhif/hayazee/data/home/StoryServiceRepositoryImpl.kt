@@ -21,8 +21,10 @@ class StoryServiceRepositoryImpl @Inject constructor(
 
     override suspend fun postStory(
         file: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: RequestBody?,
+        lon: RequestBody?
     ): Response<RegisterResponse> {
-        return apiService.postStory(file, description)
+        return apiService.postStory(file, description, lat, lon)
     }
 }

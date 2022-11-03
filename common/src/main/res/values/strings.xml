@@ -19,7 +19,6 @@
     <string name="add_description">Add Description</string>
     <string name="upload_new_story">Upload New Story</string>
     <string name="add_story_photo">Add Story Photo</string>
-    <string name="description_error_message">Description must be filled!</string>
 
     <string name="cd_add_new_story">Button add new story</string>
     <string name="cd_logout_button">Button logout</string>
@@ -30,7 +29,20 @@
     <string name="cd_take_photo_gallery">Button take photo in gallery</string>
     <string name="cd_switch_camera">Button switch camera</string>
     <string name="cd_upload_new_story">Button upload new story</string>
-
+    <string name="cd_icon_no_data">Icon story not found</string>
     <string name="cd_story_image">Story image</string>
+    <string name="cd_location_icon">Icon location</string>
 
+    <string name="location_label">Your Location</string>
+    <string name="edit_location">Edit</string>
+
+    <string name="select_location">Select Location</string>
+
+    <string name="check_camera_permission">"Check your camera permission!"</string>
+    <string name="open_camera_failed">Camera open failed.</string>
+    <string name="location_must_filled">Location must be filled!</string>
+
+    <string name="enabling_gps">Enable GPS!</string>
+    <string name="open_setting">Open setting</string>
+    <string name="cancel">Cancel</string>
 </resources>

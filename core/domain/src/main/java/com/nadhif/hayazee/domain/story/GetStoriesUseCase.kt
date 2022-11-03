@@ -1,47 +1,36 @@
 package com.nadhif.hayazee.domain.story
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import com.nadhif.hayazee.data.home.StoryRepository
 import com.nadhif.hayazee.domain.BaseUseCase
+import com.nadhif.hayazee.model.common.ResponseState
 import com.nadhif.hayazee.model.common.Story
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetStoriesUseCase @Inject constructor(
     private val storyRepository: StoryRepository
 ) : BaseUseCase() {
 
-    private val maxPage = 5
-    private val size = 20
+    operator fun invoke(size: Int?, page: Int?, location: Int? = 0): Flow<ResponseState<List<Story>>> {
 
-
-    operator fun invoke(): Flow<PagingData<Story>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = size,
-                enablePlaceholders = true
-            ),
-            pagingSourceFactory = {
-                BasePagingSource<Story>(
-                    data = { page ->
-                        val response = storyRepository.getStories(size, page, null)
-                        var result = listOf<Story>()
-                        validateResponse(response,
-                            onSuccess = {
-                                result = it.listStory ?: listOf()
-                            },
-                            onError = {
-                            }
-                        )
-
-                        result.toList()
-                    },
-                    maxPage
-                )
+        return flow {
+            try {
+                emit(ResponseState.Loading())
+                val response = storyRepository.getStories(size, page, location)
+                validateResponse(response,
+                    onSuccess = {
+                        if (it.listStory.isNullOrEmpty()) {
+                            emit(ResponseState.Success(listOf()))
+                        } else {
+                            emit(ResponseState.Success(it.listStory))
+                        }
+                    }, onError = {
+                        emit(ResponseState.Error(it))
+                    })
+            } catch (e: Exception) {
+                emit(ResponseState.Error(e.localizedMessage))
             }
-        ).flow
+        }
     }
-
 }

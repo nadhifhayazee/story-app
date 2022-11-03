@@ -5,17 +5,15 @@ import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.nadhif.hayazee.common.util.ImageUtil
-import com.nadhif.hayazee.domain.story.GetStoriesWidgetUseCase
+import com.nadhif.hayazee.domain.story.GetStoriesUseCase
 import com.nadhif.hayazee.model.common.ResponseState
 import com.nadhif.hayazee.model.common.Story
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.runBlocking
 
 class StackRemoteViewsFactory(
-    private val mContext: Context,
-    private val getStoriesWidgetUseCase: GetStoriesWidgetUseCase
-) :
-    RemoteViewsService.RemoteViewsFactory {
+    private val mContext: Context, private val getStoriesUseCase: GetStoriesUseCase
+) : RemoteViewsService.RemoteViewsFactory {
 
     private var stories = mutableListOf<Story>()
 
@@ -30,7 +28,7 @@ class StackRemoteViewsFactory(
 
     private fun getStoriesFromRemote(): MutableList<Story> {
         return runBlocking {
-            val responseState = getStoriesWidgetUseCase().last()
+            val responseState = getStoriesUseCase(10, 1, null).last()
             if (responseState is ResponseState.Success) {
                 responseState.data?.toMutableList() ?: mutableListOf()
             } else {

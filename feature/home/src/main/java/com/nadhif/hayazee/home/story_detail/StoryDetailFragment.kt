@@ -8,6 +8,7 @@ import androidx.transition.TransitionInflater
 import com.nadhif.hayazee.baseview.fragment.BaseFragment
 import com.nadhif.hayazee.common.extension.loadImage
 import com.nadhif.hayazee.common.util.DateUtil
+import com.nadhif.hayazee.common.util.LocationUtil
 import com.nadhif.hayazee.home.databinding.FragmentStoryDetailBinding
 
 
@@ -53,6 +54,9 @@ class StoryDetailFragment :
                 DateUtil.TIME_FORMAT_WITH_TZ,
                 DateUtil.EEEE_dd_MMM_yyyy_HH_mm,
                 requireContext()
+            )
+            tvLocation.text = LocationUtil.getDistrictSubDistrictName(
+                args.story?.lat ?: 0.0, args.story?.lon ?: 0.0, requireContext()
             )
         }
     }

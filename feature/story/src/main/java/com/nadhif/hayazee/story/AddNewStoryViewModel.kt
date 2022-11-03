@@ -24,12 +24,14 @@ class AddNewStoryViewModel(
 
     fun postStory(
         file: File?,
-        description: String
+        description: String,
+        lat: Double?,
+        lon: Double?,
     ) {
         viewModelScope.launch {
             if (file == null) _postStoryState.emit(ResponseState.Error("File not found!"))
             else {
-                postStoryUseCase(file, description).collectLatest {
+                postStoryUseCase(file, description, lat, lon).collectLatest {
                     _postStoryState.emit(it)
                 }
             }

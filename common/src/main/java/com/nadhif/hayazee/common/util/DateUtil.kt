@@ -25,4 +25,10 @@ object DateUtil {
 
     }
 
+    fun checkIsNight(): Boolean {
+        val cal = Calendar.getInstance()
+        val hour = cal[Calendar.HOUR_OF_DAY]
+        return hour < 6 || hour > 18
+    }
+
 }

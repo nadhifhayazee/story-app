@@ -19,7 +19,6 @@
     <string name="add_description">Tambah Deskripsi</string>
     <string name="upload_new_story">Unggah Cerita Baru</string>
     <string name="add_story_photo">Tambah Foto Cerita</string>
-    <string name="description_error_message">Deskripsi harus diisi!</string>
 
     <string name="cd_add_new_story">Tombol tambah cerita baru</string>
     <string name="cd_story_image">Gambar cerita</string>
@@ -31,5 +30,21 @@
     <string name="cd_take_photo_gallery">Tombol ambil gambar di gallery</string>
     <string name="cd_switch_camera">Tombol switch kamera</string>
     <string name="cd_upload_new_story">Tombol unggah cerita baru</string>
+    <string name="cd_icon_no_data">Icon cerita tidak ditemukan</string>
+    <string name="cd_location_icon">Icon Lokasi</string>
+
+
+    <string name="location_label">Lokasi anda</string>
+    <string name="edit_location">Ubah</string>
+
+    <string name="select_location">Pilih Lokasi</string>
+
+    <string name="check_camera_permission">"Cek lagi perizinan kamera anda!"</string>
+    <string name="open_camera_failed">Gagal membuka kamera.</string>
+    <string name="location_must_filled">Lokasi harus diisi!</string>
+
+    <string name="enabling_gps">Aktifkan GPS!</string>
+    <string name="open_setting">Buka pengaturan</string>
+    <string name="cancel">Batal</string>
 
 </resources>

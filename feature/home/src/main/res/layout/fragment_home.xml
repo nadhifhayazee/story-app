@@ -98,6 +98,7 @@
                 android:id="@+id/iv_sad"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:contentDescription="@string/cd_icon_no_data"
                 android:src="@drawable/ic_sad"
                 app:layout_constraintBottom_toTopOf="@+id/tv_not_found"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -127,6 +128,20 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_story_maps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/cd_add_new_story"
+        android:elevation="6dp"
+        android:src="@drawable/ic_maps_red"
+        app:backgroundTint="@color/white"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_new_story"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/redError" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_new_story"

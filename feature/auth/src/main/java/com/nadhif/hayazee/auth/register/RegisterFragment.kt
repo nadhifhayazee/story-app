@@ -117,6 +117,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                             root.showErrorSnackBar(it.message)
                         }
                     }
+                    else -> Unit
                 }
             }
         }

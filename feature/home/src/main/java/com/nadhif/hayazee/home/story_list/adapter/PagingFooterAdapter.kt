@@ -8,7 +8,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nadhif.hayazee.home.databinding.PagerFooterLayoutBinding
 
-class PagingFooterAdapter(private val onRetryClicked: () -> Unit = {}) : LoadStateAdapter<PagingFooterAdapter.ViewHolder>() {
+class PagingFooterAdapter(private val onRetryClicked: () -> Unit = {}) :
+    LoadStateAdapter<PagingFooterAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: PagerFooterLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {

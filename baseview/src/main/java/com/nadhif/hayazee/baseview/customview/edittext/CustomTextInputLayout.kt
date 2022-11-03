@@ -32,7 +32,6 @@ class CustomTextInputLayout(
     }
 
     private var _validator: Validator? = null
-    val validator get() = _validator
 
     fun setValidator(validator: Validator) {
         _validator = validator
@@ -40,7 +39,7 @@ class CustomTextInputLayout(
     }
 
 
-    fun validate(): Boolean {
+    private fun validate(): Boolean {
         if (_validator == null) {
             isValidated.value = true
             return true

@@ -21,17 +21,28 @@ class PostStoryUseCase @Inject constructor(
 
     operator fun invoke(
         file: File,
-        description: String
+        description: String,
+        lat: Double?,
+        lon: Double?,
     ): Flow<ResponseState<RegisterResponse>> {
         return flow {
             emit(ResponseState.Loading())
             try {
                 val compressedFile = CameraUtil.reduceFileImage(file)
-                val requestImageFile = compressedFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                val requestImageFile =
+                    compressedFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
                 val requestDescription = description.toRequestBody("text/plain".toMediaType())
+                val requestLat = lat.toString().toRequestBody("text/plain".toMediaType())
+                val requestLon = lon.toString().toRequestBody("text/plain".toMediaType())
+
                 val imageMultipart: MultipartBody.Part =
                     MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
-                val response = storyRepository.postStory(imageMultipart, requestDescription)
+                val response = storyRepository.postStory(
+                    imageMultipart,
+                    requestDescription,
+                    requestLat,
+                    requestLon
+                )
 
                 validateResponse(response,
                     onSuccess = {

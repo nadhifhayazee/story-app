@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RoundedBottomSheetDialogThemeWhite" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/TopRounded24dp</item>
+    </style>
+
+    <style name="TopRounded24dp" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_rounded_top_corner_white</item>
+    </style>
+</resources>
