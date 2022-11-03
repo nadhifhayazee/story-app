@@ -45,4 +45,6 @@
     <string name="enabling_gps">Enable GPS!</string>
     <string name="open_setting">Open setting</string>
     <string name="cancel">Cancel</string>
+
+    <string name="maps_api_key">AIzaSyC6F1sXOT8nRIdfVnZJb51Zh8tU0Xf8tvg</string>
 </resources>
